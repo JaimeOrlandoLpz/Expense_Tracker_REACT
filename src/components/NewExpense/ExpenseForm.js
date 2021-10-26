@@ -5,7 +5,7 @@ import "./ExpenseForm.css"
 const ExpenseForm = () => {
 
 
-    const[userInput, setUserInput] = useState({
+    const [userInput, setUserInput] = useState({
         enteredTitle: '',
         enteredAmount: '',
         enteredDate: ''
@@ -16,9 +16,9 @@ const ExpenseForm = () => {
     // const [enteredDate, setEnteredDate] = useState('');
 
     // Function to be executed every time title input changes
-    const titleChangeHandler = (event) =>{
+    const titleChangeHandler = (event) => {
 
-        /* IMPROPER APPROACH */ 
+        /* IMPROPER APPROACH */
         // setUserInput({
         //     ...userInput,
         //     enteredTitle: event.target.value
@@ -26,9 +26,9 @@ const ExpenseForm = () => {
 
 
         /* CORRECT APPROACH */
-        setUserInput((prevState)=>{
+        setUserInput((prevState) => {
             return {
-                ...prevState, 
+                ...prevState,
                 enteredTitle: event.target.value
             };
         });
@@ -37,42 +37,58 @@ const ExpenseForm = () => {
 
     const amountChangeHandler = (event) => {
 
-        setUserInput((prevState)=>{
+        setUserInput((prevState) => {
             return {
-                ...prevState, 
+                ...prevState,
                 enteredAmount: event.target.value
             };
         });
     }
 
     const dateChangeHandler = (event) => {
- 
 
-        setUserInput((prevState)=>{
+
+        setUserInput((prevState) => {
             return {
-                ...prevState, 
+                ...prevState,
                 enteredDate: event.target.value
             };
         });
     }
 
-    return(
-        <form>
+    // Function to be called when a form is submitted
+    const submitHandler = (event) => {
+        // Prevent page from reloading
+        event.preventDefault();
 
-            <div className = "new-expense__controls">
-                <div className = "new-expense__control">
-                    <label>Title: { userInput.enteredTitle } </label>
-                    <input type="text" onChange={ titleChangeHandler }/>
+        // Copy the Object
+        const expenseData = { ...userInput };
+
+        console.log(expenseData);
+        setUserInput({
+            enteredTitle: '',
+            enteredAmount: '',
+            enteredDate: ''
+        });
+    }
+
+    return (
+        <form onSubmit={submitHandler}>
+
+            <div className="new-expense__controls">
+                <div className="new-expense__control">
+                    <label>Title: {userInput.enteredTitle} </label>
+                    <input type="text" onChange={titleChangeHandler} value={userInput.enteredTitle} />
                 </div>
 
-                <div className = "new-expense__control">
-                    <label>Amount: { userInput.enteredAmount }</label>
-                    <input type="number" min = "0.01" step = "0.01" onChange={ amountChangeHandler }/>
+                <div className="new-expense__control">
+                    <label>Amount: {userInput.enteredAmount}</label>
+                    <input type="number" min="0.01" step="0.01" onChange={amountChangeHandler} value={userInput.enteredAmount} />
                 </div>
 
-                <div className = "new-expense__control">
-                    <label>Date: { userInput.enteredDate }</label>
-                    <input type="date" min="2021-10-24" max = "2022-12-31" onChange = { dateChangeHandler }/>
+                <div className="new-expense__control">
+                    <label>Date: {userInput.enteredDate}</label>
+                    <input type="date" min="2021-10-24" max="2022-12-31" onChange={dateChangeHandler} value={userInput.enteredDate} />
                 </div>
             </div>
 
