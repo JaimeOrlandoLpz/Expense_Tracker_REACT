@@ -35,10 +35,15 @@ const App = () => {
   //   React.createElement(Expenses, { items: expenses })
   // );
 
+  const addExpenseHandler = (expense) => {
+    console.log("In app");
+    console.log(expense);
+  }
+
   return (
     <div>
       <h2>Add a new expense</h2>
-      <NewExpense/>
+      <NewExpense onAddExpense = {/* Passing pointer of function to child */ addExpenseHandler}/>
       <Expenses items={expenses} />
       
     </div>

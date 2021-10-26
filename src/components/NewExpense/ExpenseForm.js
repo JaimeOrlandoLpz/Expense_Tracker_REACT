@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./ExpenseForm.css"
 
 // This Component will handle the form logic specifically
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
 
 
     const [userInput, setUserInput] = useState({
@@ -63,8 +63,8 @@ const ExpenseForm = () => {
 
         // Copy the Object
         const expenseData = { ...userInput };
-
-        console.log(expenseData);
+        props.onSaveExpenseData(expenseData);
+        // console.log(expenseData);
         setUserInput({
             enteredTitle: '',
             enteredAmount: '',
