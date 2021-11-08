@@ -18,23 +18,33 @@ const Expenses = (props) => {
       return (itemYear.toString() === filteredYear);
   })
   
+  let expensesContent = <p> NONE FOUND </p>;
+
+  if(filteredExpenses.length > 0){
+
+    expensesContent = filteredExpenses.map((expense)=>{
+      return(
+        <ExpenseItem 
+          key = {expense.id}
+          title = {expense.title}
+          amount = {expense.amount}
+          date = {expense.date}
+        />
+      );
+    })
+
+  }
 
   return (
     <>
       <ExpensesFilter onChangeFilter = {filterChangedHandler} selected = {filteredYear}></ExpensesFilter>
       <Card className="expenses">
 
-      { // Dynamically rendering our array
-          filteredExpenses.map((expense)=>{
-            return(
-              <ExpenseItem 
-                key = {expense.id}
-                title = {expense.title}
-                amount = {expense.amount}
-                date = {expense.date}
-              />
-            );
-        })
+      
+
+      {
+        // Dynamically access the JSX expensesContent variable to render its content
+        expensesContent
       }
 
        { // STATIC RENDERING (NOT GOOD)
