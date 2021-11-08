@@ -9,18 +9,23 @@ const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState('2022');
 
   const filterChangedHandler = (value) =>{
-    console.log("function triggered");
-    console.log(value);
     setFilteredYear(value);
-
   }
+
+  // Obtain the expenses that correspond to the selected year
+  const filteredExpenses = props.items.filter((item) => {
+      const itemYear = item.date.getFullYear()
+      return (itemYear.toString() === filteredYear);
+  })
+  
+
   return (
     <>
       <ExpensesFilter onChangeFilter = {filterChangedHandler} selected = {filteredYear}></ExpensesFilter>
       <Card className="expenses">
 
       { // Dynamically rendering our array
-          props.items.map((expense)=>{
+          filteredExpenses.map((expense)=>{
             return(
               <ExpenseItem 
                 key = {expense.id}
