@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './NewExpense.css'
 import "./ExpenseForm"
 import ExpenseForm from './ExpenseForm';
 const NewExpense = (props) =>{
 
+    const [editing, setEditing] = useState(false);
+
+    const startEditingHandler = () => {
+        setEditing(true);
+    }
+
+    const onCancel = () => {
+        setEditing(false);
+    }
+
      const saveExpenseDataHandler = (enteredExpenseData) => {
+
          // enteredExpenseData Comes from the child
 
          // Date comes as String, so we need to format it prperly YYYY-MM-DD
@@ -24,7 +35,7 @@ const NewExpense = (props) =>{
 
     return(
         <div className="new-expense">
-            <ExpenseForm onSaveExpenseData = {/* Pass pointer to function we want to execute in child */ saveExpenseDataHandler}/>
+            {editing !== true ? <button onClick ={startEditingHandler}>Add New Expense</button> : <ExpenseForm onSaveExpenseData = {/* Pass pointer to function we want to execute in child */ saveExpenseDataHandler} onCancel = {onCancel}/>}    
         </div>
     );
 }
