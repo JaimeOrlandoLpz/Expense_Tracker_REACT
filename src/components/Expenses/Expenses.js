@@ -1,3 +1,4 @@
+/* Author: Jaime Orlando López Ramos */ 
 import React, { useState } from 'react';
 
 import ExpenseItem from './ExpenseItem';
