@@ -63,7 +63,7 @@ const ExpenseForm = (props) => {
         event.preventDefault();
 
         // Copy the Object
-        const expenseData = { ...userInput };
+        const expenseData = { ...userInput, amount: +userInput.amount };
         props.onSaveExpenseData(expenseData);
         // console.log(expenseData);
         setUserInput({
